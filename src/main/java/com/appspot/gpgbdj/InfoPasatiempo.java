@@ -1,13 +1,13 @@
 package com.appspot.gpgbdj;
 
-public class Pasatiempo {
+public class InfoPasatiempo {
 	private String id;
 	private String nombre;
 
-	public Pasatiempo() {
+	public InfoPasatiempo() {
 	}
 
-	public Pasatiempo(String id, String nombre) {
+	public InfoPasatiempo(String id, String nombre) {
 		this.id = id;
 		this.nombre = nombre;
 	}

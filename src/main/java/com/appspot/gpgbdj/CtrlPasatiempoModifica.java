@@ -25,7 +25,7 @@ public class CtrlPasatiempoModifica extends HttpServlet {
 			if (nombre == null || nombre.isEmpty()) {
 				throw new Exception("Falta el nombre");
 			} else {
-				Fire.BD.collection("Pasatiempo").document(id).set(new Pasatiempo(null, nombre)).get();
+				Fire.BD.collection("Pasatiempo").document(id).set(new InfoPasatiempo(null, nombre)).get();
 			}
 			response.sendRedirect("CtrlPasatiempos");
 		} catch (Exception e) {

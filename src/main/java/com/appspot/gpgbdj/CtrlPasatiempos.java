@@ -26,8 +26,8 @@ public class CtrlPasatiempos extends HttpServlet {
 			final ApiFuture<QuerySnapshot> query = Fire.BD.collection("Pasatiempo").get();
 			final QuerySnapshot querySnapshot = query.get();
 			final List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-			final List<Pasatiempo> lista = documents.stream().map(doc -> {
-				final Pasatiempo modelo = doc.toObject(Pasatiempo.class);
+			final List<InfoPasatiempo> lista = documents.stream().map(doc -> {
+				final InfoPasatiempo modelo = doc.toObject(InfoPasatiempo.class);
 				modelo.setId(doc.getId());
 				return modelo;
 			}).collect(Collectors.toList());
