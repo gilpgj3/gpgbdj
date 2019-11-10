@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%><!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="modelo" scope="request" value="${requestScope.modelo}" />
 <c:set var="título" scope="request" value="${modelo.nombre}" />
 <html>
@@ -21,9 +22,9 @@
 			</h1>
 		</header>
 		<p>
-		<input type="hidden" name="id" value="${param.id}">
+			<input type="hidden" name="id" value="${fn:escapeXml(param.id)}">
 			<input name="nombre" type="text" placeholder="Nombre"
-				value="${modelo.nombre}">
+				value="${fn:escapeXml(modelo.nombre)}">
 		</p>
 		<%@include file="/WEB-INF/jspf/mi-footer.jspf"%>
 	</form>

@@ -59,6 +59,10 @@
 <groupId>com.google.cloud</groupId>
 <artifactId>google-cloud-firestore</artifactId>
 </dependency>
+<dependency>
+<groupId>com.google.cloud</groupId>
+<artifactId>google-cloud-storage</artifactId>
+</dependency>
 <!-- Test Dependencies -->
     <dependency>
       <groupId>junit</groupId>
