@@ -27,8 +27,7 @@ public class CtrlPasatiempoBusca extends HttpServlet {
 			final ApiFuture<DocumentSnapshot> f = Fire.BD.collection("Pasatiempo").document(id).get();
 			final DocumentSnapshot doc = f.get();
 			if (doc.exists()) {
-				final InfoPasatiempo modelo = doc.toObject(InfoPasatiempo.class);
-				request.setAttribute("modelo", modelo);
+				request.setAttribute("modelo", doc.getData());
 				request.getRequestDispatcher("FormPasatiempo.jsp").forward(request, response);
 			} else {
 				throw new Exception("No se localizó el registro.");

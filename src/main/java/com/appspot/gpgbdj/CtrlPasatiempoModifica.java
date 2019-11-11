@@ -1,6 +1,8 @@
 package com.appspot.gpgbdj;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +27,9 @@ public class CtrlPasatiempoModifica extends HttpServlet {
 			if (nombre == null || nombre.isEmpty()) {
 				throw new Exception("Falta el nombre");
 			} else {
-				Fire.BD.collection("Pasatiempo").document(id).set(new InfoPasatiempo(null, nombre)).get();
+				final Map<String, Object> modelo = new HashMap<>();
+				modelo.put("nombre", nombre);
+				Fire.BD.collection("Pasatiempo").document(id).set(modelo).get();
 			}
 			response.sendRedirect("CtrlPasatiempos");
 		} catch (Exception e) {

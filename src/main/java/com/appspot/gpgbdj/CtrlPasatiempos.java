@@ -2,6 +2,7 @@ package com.appspot.gpgbdj;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -26,9 +27,9 @@ public class CtrlPasatiempos extends HttpServlet {
 			final ApiFuture<QuerySnapshot> query = Fire.BD.collection("Pasatiempo").get();
 			final QuerySnapshot querySnapshot = query.get();
 			final List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
-			final List<InfoPasatiempo> lista = documents.stream().map(doc -> {
-				final InfoPasatiempo modelo = doc.toObject(InfoPasatiempo.class);
-				modelo.setId(doc.getId());
+			final List<Map<String, Object>> lista = documents.stream().map(doc -> {
+				final Map<String, Object> modelo = doc.getData();
+				modelo.put("id", doc.getId());
 				return modelo;
 			}).collect(Collectors.toList());
 			request.setAttribute("lista", lista);
