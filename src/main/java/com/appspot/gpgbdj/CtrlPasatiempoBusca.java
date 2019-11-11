@@ -1,5 +1,8 @@
 package com.appspot.gpgbdj;
 
+import static com.appspot.gpgbdj.Fire.BD;
+import static net.ramptors.appengine.Util.procesa;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentSnapshot;
-
-import net.ramptors.appengine.Util;
 
 @WebServlet(name = "CtrlPasatiempoBusca", urlPatterns = { "/CtrlPasatiempoBusca" })
 public class CtrlPasatiempoBusca extends HttpServlet {
@@ -24,7 +25,7 @@ public class CtrlPasatiempoBusca extends HttpServlet {
 			if (id == null || id.isEmpty()) {
 				throw new Error("Falta el id.");
 			}
-			final ApiFuture<DocumentSnapshot> f = Fire.BD.collection("Pasatiempo").document(id).get();
+			final ApiFuture<DocumentSnapshot> f = BD.collection("Pasatiempo").document(id).get();
 			final DocumentSnapshot doc = f.get();
 			if (doc.exists()) {
 				request.setAttribute("modelo", doc.getData());
@@ -33,7 +34,7 @@ public class CtrlPasatiempoBusca extends HttpServlet {
 				throw new Exception("No se localizó el registro.");
 			}
 		} catch (Exception e) {
-			Util.procesa(this, request, response, e);
+			procesa(this, request, response, e);
 		}
 	}
 }

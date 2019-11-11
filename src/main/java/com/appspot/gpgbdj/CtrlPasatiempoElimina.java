@@ -1,5 +1,8 @@
 package com.appspot.gpgbdj;
 
+import static com.appspot.gpgbdj.Fire.BD;
+import static net.ramptors.appengine.Util.procesa;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -7,8 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.ramptors.appengine.Util;
 
 @WebServlet(name = "CtrlPasatiempoElimina", urlPatterns = { "/CtrlPasatiempoElimina" })
 public class CtrlPasatiempoElimina extends HttpServlet {
@@ -21,10 +22,10 @@ public class CtrlPasatiempoElimina extends HttpServlet {
 			if (id == null || id.isEmpty()) {
 				throw new Error("Falta el id.");
 			}
-			Fire.BD.collection("Pasatiempo").document(id).delete().get();
+			BD.collection("Pasatiempo").document(id).delete().get();
 			response.sendRedirect("CtrlPasatiempos");
 		} catch (Exception e) {
-			Util.procesa(this, request, response, e);
+			procesa(this, request, response, e);
 		}
 	}
 }

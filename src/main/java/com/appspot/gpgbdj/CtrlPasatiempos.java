@@ -1,5 +1,8 @@
 package com.appspot.gpgbdj;
 
+import static com.appspot.gpgbdj.Fire.BD;
+import static net.ramptors.appengine.Util.procesa;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +18,6 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 
-import net.ramptors.appengine.Util;
-
 @WebServlet(name = "CtrlPasatiempos", urlPatterns = { "/CtrlPasatiempos" })
 public class CtrlPasatiempos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +25,7 @@ public class CtrlPasatiempos extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		try {
-			final ApiFuture<QuerySnapshot> query = Fire.BD.collection("Pasatiempo").get();
+			final ApiFuture<QuerySnapshot> query = BD.collection("Pasatiempo").get();
 			final QuerySnapshot querySnapshot = query.get();
 			final List<QueryDocumentSnapshot> documents = querySnapshot.getDocuments();
 			final List<Map<String, Object>> lista = documents.stream().map(doc -> {
@@ -35,7 +36,7 @@ public class CtrlPasatiempos extends HttpServlet {
 			request.setAttribute("lista", lista);
 			request.getRequestDispatcher("FormPasatiempos.jsp").forward(request, response);
 		} catch (Exception e) {
-			Util.procesa(this, request, response, e);
+			procesa(this, request, response, e);
 		}
 	}
 }

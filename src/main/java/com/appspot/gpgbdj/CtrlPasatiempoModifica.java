@@ -1,5 +1,8 @@
 package com.appspot.gpgbdj;
 
+import static com.appspot.gpgbdj.Fire.BD;
+import static net.ramptors.appengine.Util.procesa;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.ramptors.appengine.Util;
 
 @WebServlet(name = "CtrlPasatiempoModifica", urlPatterns = { "/CtrlPasatiempoModifica" })
 public class CtrlPasatiempoModifica extends HttpServlet {
@@ -29,11 +30,11 @@ public class CtrlPasatiempoModifica extends HttpServlet {
 			} else {
 				final Map<String, Object> modelo = new HashMap<>();
 				modelo.put("nombre", nombre);
-				Fire.BD.collection("Pasatiempo").document(id).set(modelo).get();
+				BD.collection("Pasatiempo").document(id).set(modelo).get();
 			}
 			response.sendRedirect("CtrlPasatiempos");
 		} catch (Exception e) {
-			Util.procesa(this, request, response, e);
+			procesa(this, request, response, e);
 		}
 	}
 }
